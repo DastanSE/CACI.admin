@@ -1,0 +1,16 @@
+.login-page {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 188, 212);
+  position: relative;
+}
+.login-container {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  padding: 30px 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

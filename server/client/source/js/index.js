@@ -11,6 +11,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import App from 'views/App';
 
+// Development only axios helpers!
+import axios from 'axios';
+window.axios = axios;
+
 // Load SCSS
 import '../scss/index.scss';
 
@@ -43,6 +47,7 @@ if (isProduction) {
 
   store = createStore(rootReducer, enhancer);
 }
+
 
 // Render it to DOM
 ReactDOM.render(

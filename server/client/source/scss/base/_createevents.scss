@@ -1,0 +1,10 @@
+.create_event {
+    height: 100%;
+    width: 90%;
+    margin-top: 40px;
+  @include lg{
+    padding: 20px;
+    margin: 0 auto;
+
+  };
+}
