@@ -1,16 +1,31 @@
-import UPLOAD_IMG_REQUEST from '../types/appTypes';
-import UPLOAD_IMG_FAIL from '../types/appTypes';
-import UPLOAD_IMG_SUCCES from '../types/appTypes';
+import AppTypes from '../types/appTypes';
 
-export default function(state = null, action) {
+const initialState = {
+  _imageIsLoading: false,
+};
+
+export default function (state = initialState, action) {
   switch (action.type) {
-    case UPLOAD_IMG_REQUEST:
-      return action.payload || false;
-    case UPLOAD_IMG_FAIL:
-      return action.payload || false;
-    case UPLOAD_IMG_SUCCES:
-      return action.payload;
-    default:
-      return false;
+    case AppTypes.UPLOAD_IMG_REQUEST:
+      state = {
+        ...state,
+        _imageIsLoading: action.payload._imageIsLoading,
+      };
+      break;
+    case AppTypes.UPLOAD_IMG_FAIL:
+      state = {
+        ...state,
+        _imageIsLoading: action.payload._imageIsLoading,
+        error: action.payload.error,
+      };
+      break;
+    case AppTypes.UPLOAD_IMG_SUCCES:
+      state = {
+        ...state,
+        _imageIsLoading: action.payload._imageIsLoading,
+        data: action.payload.data,
+      };
+      break;
   }
+  return state;
 }

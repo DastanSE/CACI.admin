@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { connect } from "react-redux";
-import * as actions from "../../actions";
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 class Step2 extends Component {
   constructor() {
@@ -14,21 +14,16 @@ class Step2 extends Component {
     newFiles.push(files);
     this.setState({ files: newFiles });
     this.props.uploadImg(files[0]);
-
-    console.log('uploadImg', files)
   }
 
   render() {
-    console.log('step2 props: ', this.props);
     return (
       <div>
         <p>Upload images</p>
         <Dropzone onDrop={ this.onDrop.bind(this) }>
           <p>
-            Drag and drop Image or click here <i
-              className='fa fa-mouse-pointer'
-              aria-hidden='true'
-            />
+            Drag and drop Image or click here{' '}
+            <i className='fa fa-mouse-pointer' aria-hidden='true' />
             for choose image to upload button
           </p>
         </Dropzone>
@@ -45,4 +40,8 @@ class Step2 extends Component {
   }
 }
 
-export default connect(null, actions)(Step2);
+function mapStateToProps({img}) {
+  return {img};
+}
+
+export default connect(mapStateToProps, actions)(Step2);
