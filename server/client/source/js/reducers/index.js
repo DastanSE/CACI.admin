@@ -4,6 +4,6 @@ import imgUploadReducer from './imgUploadReducer';
 
 
 export default combineReducers({
-  authReducer,
-  imgUploadReducer,
+  auth: authReducer,
+  img: imgUploadReducer,
 });

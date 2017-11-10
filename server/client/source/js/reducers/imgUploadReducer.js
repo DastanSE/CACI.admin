@@ -2,6 +2,7 @@ import AppTypes from '../types/appTypes';
 
 const initialState = {
   _imageIsLoading: false,
+  imgSrc: [],
 };
 
 export default function (state = initialState, action) {
@@ -20,10 +21,13 @@ export default function (state = initialState, action) {
       };
       break;
     case AppTypes.UPLOAD_IMG_SUCCES:
+      let images = state.imgSrc.slice();
+      images.push(action.payload.secure_url);
       state = {
         ...state,
         _imageIsLoading: action.payload._imageIsLoading,
         data: action.payload.data,
+        imgSrc: images
       };
       break;
   }

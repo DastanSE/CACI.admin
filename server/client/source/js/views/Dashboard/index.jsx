@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import { Drawer, Menu, MenuItem, RaisedButton } from 'material-ui';
 import CreateEvent from '../CreateEvent';
+import EventsPage from '../EventsPage';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,14 +18,21 @@ class Dashboard extends Component {
         <Drawer open={ this.state.drawerOpen }>
           <Menu>
             <MenuItem>
-              <NavLink to={ `${ match.url }/create_event` }>Create Event</NavLink>
+              <NavLink className='dashboard-links' to={ `${ match.url }/create_event` }>
+                <i className='fa fa-calendar-o' aria-hidden='true' /> Create Event
+              </NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink className='dashboard-links' to={ `${ match.url }/events` }>
+                <i className='fa fa-columns' aria-hidden='true' /> Events
+              </NavLink>
             </MenuItem>
           </Menu>
-
         </Drawer>
 
-        <div style={{marginLeft: 300}}>
+        <div style={ { marginLeft: 300 } }>
           <Route path={ `${ match.url }/create_event` } component={ CreateEvent } />
+          <Route path={ `${ match.url }/events` } component={ EventsPage } />
           <Route exact path={ match.url } render={ () => <h3>Dashboard</h3> } />
         </div>
       </div>
