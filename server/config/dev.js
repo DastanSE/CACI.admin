@@ -1,9 +1,9 @@
 // dev.js dont commit this
 module.exports = {
-  mongoURI: 'mongodb://dastan:141108kz@ds241395.mlab.com:41395/caci-dev',
-  cookieKey: 'isudfghiudhfgiushfglnkjasbdfbjkfiuwipuqhwrfasdfljkandflkjandfjasdf',
-  cloudinaryApiKey: '171693432154957',
-  cloudinaryApiSecretKey: 'dXU3Q3Onp0RtYt8EvL8a9mDMs8g',
-  cloudinaryUploadPreset: 'evmcpql0',
-  cloudinaryImageUploadUrl: 'https://api.cloudinary.com/v1_1/dastan1994/image/upload',
+  mongoURI: 'mongodb://caciadmin:CACIllz878790@ds257245.mlab.com:57245/caci-dev',
+  cookieKey: 'kajsdnfkjasndfajsndfklasjndflkasjndfklasjdnfkjdfkasdfoj3328',
+  cloudinaryApiKey: '239464588862319',
+  cloudinaryApiSecretKey: 'mU288gYhgiLGJIEv5d4S2Yv4sYs',
+  cloudinaryUploadPreset: 'rpepxdxq',
+  cloudinaryImageUploadUrl: 'https://api.cloudinary.com/v1_1/cacicloud/image/upload',
 }

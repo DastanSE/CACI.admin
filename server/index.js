@@ -1,27 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
+const passport = require("passport");
 const bodyParser = require("body-parser");
 const cloudinary = require('cloudinary');
 const keys = require("./config/keys");
+const proxy = require('http-proxy-middleware');
 
 require("./models/User");
+require("./services/passport");
 mongoose.connect(keys.mongoURI);
 const app = express();
 const User = mongoose.model("users");
 
 cloudinary.config({
-  cloud_name: 'dastan1994',
+  cloud_name: 'cacicloud',
   api_key: keys.cloudinaryApiKey,
   api_secret: keys.cloudinaryApiSecretKey
 });
-
-cloudinary.uploader.upload("my_picture.jpg", function(result) {
-  console.log(result)
-});
-
-
-
 
 app.use(bodyParser.json());
 app.use(
@@ -31,17 +27,24 @@ app.use(
   })
 );
 
+app.use('/api', proxy({target: 'http://localhost:5000', changeOrigin: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/test", (req, res) => {
-    res.send(req.user);
+require("./routes/auth")(app);
+
+if (process.env.NODE_ENV === "production") {
+  // express will serve up production assets
+  // Like our main.js file, or main.css file
+  app.use(express.static("client/build"));
+
+  // Express will serve up index.html file
+  // if it doesnt recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
-
-
-  // app.post('/login', passport.authenticate('local-login', {
-  //       successRedirect : '/profile', // redirect to the secure profile section
-  //       failureRedirect : '/login', // redirect back to the signup page if there is an error
-  //       failureFlash : true // allow flash messages
-  //   }));
+}
 
 const PORT = process.env.PORT || 5000;
 

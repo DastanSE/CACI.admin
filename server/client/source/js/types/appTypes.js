@@ -1,8 +1,7 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
-  FETCH_USER: null,
-
+  SESSION_AUTHORIZE_REQUEST: null,
   SESSION_AUTHORIZE_SUCCESS: null,
   SESSION_AUTHORIZE_FAIL: null,
 

@@ -17,7 +17,7 @@ export const routeCodes = {
   DASHBOARD: `${ adminPath }dashboard`,
 };
 
-const loggedIn = true;
+const loggedIn = null;
 
 export default class App extends Component {
   constructor(props) {

@@ -4,14 +4,6 @@
   "description": "CMS for CACI online products",
   "main": "index.js",
   "private": true,
-  "proxy": {
-    "login": {
-      "target": "http://localhost:5000"
-    },
-    "/api/*": {
-      "target": "http://localhost:5000"
-    }
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",

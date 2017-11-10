@@ -11,9 +11,11 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --dev --prefix client && npm run build --prefix client"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "cloudinary": "^1.9.1",
     "concurrently": "^3.5.0",
@@ -37,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/DastanSE/CACI.admin/issues"
   },
-  "homepage": "https://github.com/DastanSE/CACI.admin#readme"
+  "homepage": "https://github.com/DastanSE/CACI.admin#readme",
+  "devDependencies": {
+    "http-proxy-middleware": "^0.17.4"
+  }
 }
