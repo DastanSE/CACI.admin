@@ -159,12 +159,12 @@ module.exports = {
     inline: !isProduction,
     hot: !isProduction,
     host: '0.0.0.0',
-    proxy: {
-      '/api/*': {
-        target: 'http://[::1]:5000',
-        secure: false,
+    proxy: [
+      {
+        context: ['/register/api', '/api'],
+        target: 'http://localhost:5000',
       },
-    },
+    ],
     disableHostCheck: true,
     stats: {
       assets: true,

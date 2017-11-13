@@ -30,14 +30,10 @@ function sessionAuthorizeFail(error) {
   };
 }
 
-export const sessionAuthorize = (user = {}) => async dispatch => {
+export const sessionAuthorize = (data) => async dispatch => {
   dispatch(sessionAuthorizeRequest());
-  const formData = new FormData();
-
-  formData.append('user', user.username);
-  formData.append('passport', user.passport);
   try {
-    const res = await axios.post('api/login', formData);
+    const res = await axios.post('api/login', data);
 
     dispatch(sessionAuthorizeSuccess(res.data));
   } catch (error) {

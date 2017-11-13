@@ -3,7 +3,6 @@ import { RaisedButton, Paper, TextField, FlatButton, Dialog } from 'material-ui'
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 class LoginPage extends Component {
@@ -17,68 +16,51 @@ class LoginPage extends Component {
     };
   }
 
-  onUsernameChange(e, newValue) {
-    this.setState({ username: newValue });
-  }
-
-  onPasswordChange(e, newValue) {
-    this.setState({ password: newValue });
-  }
-
-  handleClick() {
-    const { username, password } = this.state;
-    console.log('username: ', username);
-    console.log('password: ', password);
-    this.props.sessionAuthorize({
-      username,
-      password,
-    });
-  }
-
-  handleSignup() {
-    this.setState({
-      open: true,
-    });
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
+  onEditText = name => {
+    return event => {
+      this.setState({
+        [name]: event.target.value,
+      });
+    };
   };
 
-  showHidePassword() {
-    if (this.state.signUpPasswordType === 'password') {
-      this.setState({
-        signUpPasswordType: 'text',
-      });
-    } else {
-      this.setState({
-        signUpPasswordType: 'password',
-      });
-    }
+  handleSignIn() {
+    const { username, password } = this.state;
+    const data = {
+      username,
+      password,
+    };
+    this.props.sessionAuthorize(data);
   }
 
   render() {
     const { match } = this.props;
-    console.log(this.state.signUpPasswordType);
-
-    const actions = [
-      <FlatButton label='Cancel' primary={ true } onClick={ this.handleClose } />,
-      <FlatButton label='Submit' primary={ true } onClick={ this.handleSubmit } />,
-    ];
 
     return (
       <div className='login-page'>
         <Paper className='login-container' zDepth={ 2 }>
           <img src='../../../assets/img/logo.png' />
-
           <Route
             exact
             path={ match.url }
             render={ () => {
+              console.log('hi', this);
               return (
                 <div>
-                  <SignIn />
-                  <RaisedButton label='Sign in' primary={ true } />
+                  <h1>Sign In</h1>
+                  <div>
+                    <TextField
+                      floatingLabelText='Username'
+                      onChange={ this.onEditText('username') }
+                    />
+                    <br />
+                    <TextField
+                      floatingLabelText='Password'
+                      type='password'
+                      onChange={ this.onEditText('password') }
+                    />
+                  </div>
+                  <RaisedButton label='Sign in' onClick={ this.handleSignIn.bind(this) } primary={ true } />
                   <Link to={ `${ match.url }/signup` }>
                     <FlatButton label='Sign up' style={ { marginLeft: '10px' } } primary={ true } />
                   </Link>
@@ -86,42 +68,7 @@ class LoginPage extends Component {
               );
             } }
           />
-          <Route
-            exact
-            path={ `${ match.url }/signup` }
-            render={ () => {
-              return (
-                <div>
-                  <SignUp />
-                  <Dialog
-                    title='Please enter your Admin Panel Sign Up Password'
-                    actions={ actions }
-                    open={ this.state.open }
-                  >
-                    <TextField
-                      floatingLabelText='Admin Panel SignUp password is Requiered'
-                      type={ this.state.signUpPasswordType }
-                      fullWidth={ true }
-                      onChange={ this.props.onPasswordChange }
-                    />
-                    <br />
-                    <i
-                      className='fa fa-eye'
-                      style={ { cursor: 'pointer', marginTop: '10px' } }
-                      onClick={ this.showHidePassword.bind(this) }
-                      aria-hidden='true'
-                    />
-                  </Dialog>
-                  <FlatButton
-                    label='Sign up'
-                    style={ { marginLeft: '10px' } }
-                    onClick={ this.handleSignup.bind(this) }
-                    primary={ true }
-                  />
-                </div>
-              );
-            } }
-          />
+          <Route exact path={ `${ match.url }/signup` } render={ () => <SignUp /> } />
         </Paper>
       </div>
     );
