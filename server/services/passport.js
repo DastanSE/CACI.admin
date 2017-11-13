@@ -15,7 +15,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use(
+passport.use('login',
   new LocalStrategy((username, password, done) => {
     User.getUserByUsername(username, (err, user) => {
       if (err) throw err;

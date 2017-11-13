@@ -1,7 +1,7 @@
 import AppTypes from '../types/appTypes';
 
 const initialState = {
-  _isLogin:  false
+  _isLogin: false,
 };
 
 export default function (state = initialState, action) {
@@ -12,6 +12,7 @@ export default function (state = initialState, action) {
       };
       break;
     case AppTypes.SESSION_AUTHORIZE_FAIL:
+      console.log('reduser looggg', state.error);
       state = {
         ...state,
         error: action.payload.error,

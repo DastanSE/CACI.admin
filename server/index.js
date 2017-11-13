@@ -5,11 +5,11 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cloudinary = require('cloudinary');
 const keys = require("./config/keys");
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
 
 require("./models/User");
 require("./services/passport");
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useMongoClient: true });
 const app = express();
 const User = mongoose.model("users");
 
@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-app.use('/api', proxy({target: 'http://localhost:5000', changeOrigin: true}));
+// app.use('/api/**', proxy({target: 'http://localhost:5000', secure: false,changeOrigin: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -21,13 +21,13 @@ export default function (state = initialState, action) {
       };
       break;
     case AppTypes.UPLOAD_IMG_SUCCES:
-      let images = state.imgSrc.slice();
+      const images = state.imgSrc.slice();
       images.push(action.payload.secure_url);
       state = {
         ...state,
         _imageIsLoading: action.payload._imageIsLoading,
         data: action.payload.data,
-        imgSrc: images
+        imgSrc: images,
       };
       break;
   }
