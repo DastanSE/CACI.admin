@@ -26,7 +26,11 @@ class SignUp extends Component {
   };
 
   handleSignup() {
-    if (this.state.password1 !== this.state.password2) {
+    if(!(this.state.password1 && this.state.password2)){
+      this.setState({
+        errorText: 'Should not be empty',
+      });
+    } else if (this.state.password1 !== this.state.password2) {
       this.setState({
         errorText: 'Password and Confirm Password should match',
       });
@@ -67,7 +71,6 @@ class SignUp extends Component {
 
   render() {
     const { match } = this.props;
-    console.log(this.state);
 
     const dialog = [
       <FlatButton label='Cancel' primary={ true } onClick={ this.handleClose } />,

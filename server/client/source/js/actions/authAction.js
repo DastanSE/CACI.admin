@@ -11,6 +11,7 @@ function sessionAuthorizeRequest() {
 }
 
 function sessionAuthorizeSuccess(data) {
+  console.log("sessionAuthorize data: ", ...data)
   return {
     type: AppTypes.SESSION_AUTHORIZE_SUCCESS,
     payload: {
@@ -33,10 +34,15 @@ function sessionAuthorizeFail(error) {
 export const sessionAuthorize = (data) => async dispatch => {
   dispatch(sessionAuthorizeRequest());
   try {
-    const res = await axios.post('api/login', data);
+    const res = await axios.post('api/signin', data);
 
     dispatch(sessionAuthorizeSuccess(res.data));
   } catch (error) {
     dispatch(sessionAuthorizeFail(error));
   }
+};
+
+export const fetchUser = () => async dispatch => {
+  const res = await axios.get("api/current_user");
+  dispatch({ type: AppTypes.FETCH_USER, payload: res.data });
 };

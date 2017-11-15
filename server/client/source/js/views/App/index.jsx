@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import PropTypes from 'prop-types';
 import MainPage from 'views/MainPage';
 import RegisterPage from 'views/RegisterPage';
@@ -17,15 +19,14 @@ export const routeCodes = {
   DASHBOARD: `${ adminPath }dashboard`,
 };
 
-const loggedIn = null;
-
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
   static propTypes = {
     children: PropTypes.object,
   };
+
 
   render() {
     return (
@@ -36,17 +37,32 @@ export default class App extends Component {
               exact
               path={ routeCodes.PUBLIC }
               render={ () =>
-                loggedIn ? (
+                this.props.auth._isLogin ? (
                   <Redirect to={ routeCodes.ADMINPAGE } />
                 ) : (
                   <Redirect to={ routeCodes.REGISTERPAGE } />
                 ) }
             />
             <Route path={ routeCodes.REGISTERPAGE } component={ RegisterPage } />
-            <Route path={ routeCodes.ADMINPAGE } component={ Dashboard } />
+            <Route path={ routeCodes.ADMINPAGE } onEnter={ requireAuth } component={ Dashboard } />
           </Switch>
         </div>
       </BrowserRouter>
     );
   }
 }
+
+function requireAuth(nextState, replace) {
+  if (!this.props._isLogin) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname },
+    });
+  }
+}
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps, actions)(App);

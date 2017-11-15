@@ -2,6 +2,7 @@ import AppTypes from '../types/appTypes';
 
 const initialState = {
   _isLogin: false,
+  username: '',
 };
 
 export default function (state = initialState, action) {
@@ -12,7 +13,6 @@ export default function (state = initialState, action) {
       };
       break;
     case AppTypes.SESSION_AUTHORIZE_FAIL:
-      console.log('reduser looggg', state.error);
       state = {
         ...state,
         error: action.payload.error,
@@ -22,9 +22,12 @@ export default function (state = initialState, action) {
       state = {
         ...state,
         _isLogin: action.payload._isLogin,
-        data: action.payload.data,
+        username: action.payload.username,
       };
       break;
+
+    case AppTypes.FETCH_USER:
+      return action.payload || false;
   }
   return state;
 }

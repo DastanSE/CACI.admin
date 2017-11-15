@@ -5,7 +5,6 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cloudinary = require('cloudinary');
 const keys = require("./config/keys");
-// const proxy = require('http-proxy-middleware');
 
 require("./models/User");
 require("./services/passport");
@@ -27,11 +26,11 @@ app.use(
   })
 );
 
-// app.use('/api/**', proxy({target: 'http://localhost:5000', secure: false,changeOrigin: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/auth")(app);
+
 
 if (process.env.NODE_ENV === "production") {
   // express will serve up production assets

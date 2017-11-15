@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RaisedButton, Paper, TextField, FlatButton, Dialog } from 'material-ui';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import SignUp from './SignUp';
@@ -23,7 +23,17 @@ class LoginPage extends Component {
       });
     };
   };
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.auth._isLogin && nextProps.auth.username) {
+      this.props.history.push('/');
+    }
+  }
 
+  componentDidMount() {
+    if (this.state.auth._isLogin) {
+      this.props.history.push('/');
+    }
+  }
   handleSignIn() {
     const { username, password } = this.state;
     const data = {
@@ -35,7 +45,7 @@ class LoginPage extends Component {
 
   render() {
     const { match } = this.props;
-
+    console.log('RIGISTER PAge: ', this.state);
     return (
       <div className='login-page'>
         <Paper className='login-container' zDepth={ 2 }>
@@ -44,7 +54,6 @@ class LoginPage extends Component {
             exact
             path={ match.url }
             render={ () => {
-              console.log('hi', this);
               return (
                 <div>
                   <h1>Sign In</h1>
@@ -60,7 +69,11 @@ class LoginPage extends Component {
                       onChange={ this.onEditText('password') }
                     />
                   </div>
-                  <RaisedButton label='Sign in' onClick={ this.handleSignIn.bind(this) } primary={ true } />
+                  <RaisedButton
+                    label='Sign in'
+                    onClick={ this.handleSignIn.bind(this) }
+                    primary={ true }
+                  />
                   <Link to={ `${ match.url }/signup` }>
                     <FlatButton label='Sign up' style={ { marginLeft: '10px' } } primary={ true } />
                   </Link>
@@ -75,4 +88,8 @@ class LoginPage extends Component {
   }
 }
 
-export default connect(null, actions)(LoginPage);
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps, actions)(withRouter(LoginPage));

@@ -5,17 +5,17 @@ const keys = require("../config/keys");
 
 const User = mongoose.model("users");
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
+passport.deserializeUser((id, done) => {
+  User.getUserById(id, (err, user) => {
     done(err, user);
   });
 });
 
-passport.use('login',
+passport.use(
   new LocalStrategy((username, password, done) => {
     User.getUserByUsername(username, (err, user) => {
       if (err) throw err;
