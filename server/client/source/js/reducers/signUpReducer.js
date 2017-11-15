@@ -2,6 +2,7 @@ import AppTypes from '../types/appTypes';
 
 const initialState = {
   _isLogin: false,
+  errorMessage: '',
 };
 
 export default function (state = initialState, action) {
@@ -12,17 +13,17 @@ export default function (state = initialState, action) {
       };
       break;
     case AppTypes.SIGN_UP_FAIL:
-      console.log('reduser looggg', state.error);
       state = {
         ...state,
         error: action.payload.error,
       };
       break;
-    case AppTypes.SIGN_UP_SUCCESS:
+    case AppTypes.SIGN_UP:
       state = {
         ...state,
         _isLogin: action.payload._isLogin,
         data: action.payload.data,
+        errorMessage: action.payload.data.error
       };
       break;
   }

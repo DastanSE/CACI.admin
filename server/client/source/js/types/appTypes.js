@@ -8,7 +8,7 @@ export default keyMirror({
   FETCH_USER: null,
 
   SIGN_UP_REQUEST: null,
-  SIGN_UP_SUCCESS: null,
+  SIGN_UP: null,
   SIGN_UP_FAIL: null,
 
   CREATE_EVENT_REQUEST: null,

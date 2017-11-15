@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import SignUp from './SignUp';
 
-class LoginPage extends Component {
+import { Loading } from '../../components/Global/Loading';
+
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +32,7 @@ class LoginPage extends Component {
   }
 
   componentDidMount() {
-    if (this.state.auth._isLogin) {
+    if (this.props.auth._isLogin) {
       this.props.history.push('/');
     }
   }
@@ -45,7 +47,6 @@ class LoginPage extends Component {
 
   render() {
     const { match } = this.props;
-    console.log('RIGISTER PAge: ', this.state);
     return (
       <div className='login-page'>
         <Paper className='login-container' zDepth={ 2 }>
@@ -92,4 +93,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps, actions)(withRouter(LoginPage));
+export default connect(mapStateToProps, actions)(withRouter(RegisterPage));

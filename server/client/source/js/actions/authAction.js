@@ -11,7 +11,6 @@ function sessionAuthorizeRequest() {
 }
 
 function sessionAuthorizeSuccess(data) {
-  console.log("sessionAuthorize data: ", ...data)
   return {
     type: AppTypes.SESSION_AUTHORIZE_SUCCESS,
     payload: {

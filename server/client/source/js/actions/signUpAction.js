@@ -10,11 +10,12 @@ function signUpRequest() {
   };
 }
 
-function signUpSuccess() {
+function signUpSuccess(data) {
   return {
-    type: AppTypes.SIGN_UP_SUCCESS,
+    type: AppTypes.SIGN_UP,
     payload: {
       _isSignUp: true,
+      data: data
     },
   };
 }

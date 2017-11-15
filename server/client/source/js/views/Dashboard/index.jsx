@@ -27,6 +27,9 @@ class Dashboard extends Component {
                 <i className='fa fa-columns' aria-hidden='true' /> Events
               </NavLink>
             </MenuItem>
+            <MenuItem>
+              <a href='api/logout'>Logout</a>
+            </MenuItem>
           </Menu>
         </Drawer>
 

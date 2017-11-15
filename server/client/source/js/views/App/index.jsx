@@ -27,6 +27,15 @@ class App extends Component {
     children: PropTypes.object,
   };
 
+  componentWillMount() {
+    this.props.fetchUser();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.auth._isLogin && nextProps.auth.username) {
+      return true;
+    }
+  }
 
   render() {
     return (
@@ -37,7 +46,7 @@ class App extends Component {
               exact
               path={ routeCodes.PUBLIC }
               render={ () =>
-                this.props.auth._isLogin ? (
+                this.props.auth.username ? (
                   <Redirect to={ routeCodes.ADMINPAGE } />
                 ) : (
                   <Redirect to={ routeCodes.REGISTERPAGE } />

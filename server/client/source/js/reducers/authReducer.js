@@ -27,7 +27,11 @@ export default function (state = initialState, action) {
       break;
 
     case AppTypes.FETCH_USER:
-      return action.payload || false;
+        state = {
+          _isLogin: action.payload.username ? true : false,
+          username: action.payload.username
+        };
+      break;
   }
   return state;
 }

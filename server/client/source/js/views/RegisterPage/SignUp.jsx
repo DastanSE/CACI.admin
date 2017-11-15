@@ -26,7 +26,7 @@ class SignUp extends Component {
   };
 
   handleSignup() {
-    if(!(this.state.password1 && this.state.password2)){
+    if (!(this.state.password1 && this.state.password2)) {
       this.setState({
         errorText: 'Should not be empty',
       });
@@ -53,7 +53,6 @@ class SignUp extends Component {
       password,
       adminPassword,
     };
-    console.log(this.props.signUp);
     this.props.signUp(data);
   }
 
@@ -76,7 +75,7 @@ class SignUp extends Component {
       <FlatButton label='Cancel' primary={ true } onClick={ this.handleClose } />,
       <FlatButton label='Submit' primary={ true } onClick={ this.handleSubmit.bind(this) } />,
     ];
-
+    console.log(this.props);
     return (
       <div>
         <h1>Sign Up</h1>
@@ -112,6 +111,7 @@ class SignUp extends Component {
             floatingLabelText='Admin Panel SignUp password is Requiered'
             type={ this.state.signUpPasswordType }
             fullWidth={ true }
+            errorText={ this.props.signUp.errorText }
             onChange={ this.onEditText('adminPassword') }
           />
           <br />
@@ -133,4 +133,8 @@ class SignUp extends Component {
   }
 }
 
-export default connect(null, actions)(SignUp);
+function mapStateToProps({ signUp }) {
+  return { signUp };
+}
+
+export default connect(mapStateToProps, actions)(SignUp);
