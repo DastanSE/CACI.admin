@@ -6,4 +6,5 @@ module.exports = {
   cloudinaryApiSecretKey: 'mU288gYhgiLGJIEv5d4S2Yv4sYs',
   cloudinaryUploadPreset: 'rpepxdxq',
   cloudinaryImageUploadUrl: 'https://api.cloudinary.com/v1_1/cacicloud/image/upload',
+  adminPassword: 'CACIllz878790'
 }

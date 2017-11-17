@@ -15,7 +15,7 @@ const buildPath = path.join(__dirname, './build');
 const imgPath = path.join(__dirname, './source/assets/img');
 const iconPath = path.join(__dirname, './source/assets/icons');
 const sourcePath = path.join(__dirname, './source');
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
 
 // Common plugins
 const plugins = [
@@ -159,11 +159,12 @@ module.exports = {
     inline: !isProduction,
     hot: !isProduction,
     host: '0.0.0.0',
-    proxy: {
-      '/api/*': {
-        target: 'http://localhost:5000',        
+    proxy: [
+      {
+        context: ['/register/api', '/api'],
+        target: 'http://localhost:5000',
       },
-    },
+    ],
     disableHostCheck: true,
     stats: {
       assets: true,

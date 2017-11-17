@@ -5,6 +5,12 @@ export default keyMirror({
   SESSION_AUTHORIZE_SUCCESS: null,
   SESSION_AUTHORIZE_FAIL: null,
 
+  FETCH_USER: null,
+
+  SIGN_UP_REQUEST: null,
+  SIGN_UP: null,
+  SIGN_UP_FAIL: null,
+
   CREATE_EVENT_REQUEST: null,
   CREATE_EVENT_FAIL: null,
   CREATE_EVENT_SUCCESS: null,
