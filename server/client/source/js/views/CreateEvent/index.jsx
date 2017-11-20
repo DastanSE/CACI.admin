@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { RaisedButton, FlatButton, Paper, TextField } from 'material-ui';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
-import Step1 from './Step1';
-import Step2 from './Step2';
-import Step3 from './Step3';
+import { Step1 } from './Step1';
+import { Step2 } from './Step2';
+import { Step3 } from './Step3';
 
 const OneDayInMs = 24 * 3600 * 1000;
 
@@ -27,7 +27,6 @@ class CreateEvent extends Component {
       title: '',
       event_date: {},
       event_images: this.props.img.imgSrc,
-      event_link: '',
       event_body: '',
     };
   }
@@ -73,6 +72,17 @@ class CreateEvent extends Component {
     this.props.uploadImg(files[0]);
   }
 
+  handleSubmit = () => {
+    const { title, event_date, event_body, event_images } = this.state;
+    const data = {
+      title,
+      event_date,
+      event_body,
+      event_images,
+    };
+    this.props.createEvent(data);
+  };
+
   getStepContent(stepIndex) {
     const { title, event_date } = this.state;
     switch (stepIndex) {
@@ -90,11 +100,11 @@ class CreateEvent extends Component {
           <Step2
             event_images={ this.state.event_images }
             onDrop={ this.onDrop.bind(this) }
-            imageIsloading={ this.props.img._imageIsLoading }            
+            imageIsloading={ this.props.img._imageIsLoading }
           />
         );
       case 2:
-        return <Step3 />;
+        return <Step3 onEditText={ this.onEditText } event_body={ this.state.event_body } />;
       default:
         return "You're a long way from home sonny jim!";
     }
@@ -149,7 +159,7 @@ class CreateEvent extends Component {
                   <RaisedButton
                     label={ stepIndex === 2 ? 'Submit' : 'Next' }
                     primary={ true }
-                    onClick={ this.handleNext }
+                    onClick={ stepIndex === 2 ? this.handleSubmit : this.handleNext }
                   />
                 </div>
               </div>

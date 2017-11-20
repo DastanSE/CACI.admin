@@ -161,7 +161,7 @@ module.exports = {
     host: '0.0.0.0',
     proxy: [
       {
-        context: ['/register/api', '/api'],
+        context: ['/register/api', '/api', '/admin/api'],
         target: 'http://localhost:5000',
       },
     ],

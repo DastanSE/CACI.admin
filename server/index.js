@@ -30,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/auth")(app);
+require("./routes/event")(app);
 
 
 if (process.env.NODE_ENV === "production") {

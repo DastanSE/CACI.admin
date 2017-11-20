@@ -1,11 +1,6 @@
 import AppTypes from '../types/appTypes';
 
 const initialState = {
-  title: '',
-  event_images: [],
-  event_date: '',
-  event_link: '',
-  event_body: '',
 };
 
 export default function (state = initialState, action) {
@@ -13,7 +8,7 @@ export default function (state = initialState, action) {
     case AppTypes.CREATE_EVENT_REQUEST:
       state = {
         ...state,
-        
+
       };
       break;
     case AppTypes.CREATE_EVENT_FAIL:
