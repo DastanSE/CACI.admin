@@ -6,11 +6,20 @@ export default class Step1 extends Component {
     super(props);
   }
 
-  render() {
+  render() {    
     return (
       <div>
-        <TextField hintText='Set title' />
-        <DatePicker hintText='Choose event date' />
+        <TextField
+          hintText='Set title'
+          value={ this.props.title }
+          onChange={ this.props.onEditText('title') }
+        />
+        <DatePicker
+          hintText='Choose event date'
+          value={ this.props.event_date }
+          onChange={ this.props.onHandleDatePicker('event_date') }
+        />
+
       </div>
     );
   }

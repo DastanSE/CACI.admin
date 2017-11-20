@@ -18,7 +18,6 @@ module.exports = app => {
       });
 
       User.createUser(newUser, (err, user) => {
-        console.log(user);
         if (err) throw err;
         res.send(user);
         res.redirect("/");

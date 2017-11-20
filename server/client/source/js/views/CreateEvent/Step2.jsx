@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
 import { Loading } from '../../components/Global/Loading';
 
-class Step2 extends Component {
-  constructor() {
-    super();
-    this.state = { imgSrc: [] };
-  }
-
-  onDrop(files) {
-    this.props.uploadImg(files[0]);
+export default class Step2 extends Component {
+  constructor(props) {
+    super(props);
   }
 
   render() {
     return (
       <div>
         <p>Upload images</p>
-        <Dropzone onDrop={ this.onDrop.bind(this) }>
+        <Dropzone onDrop={ this.props.onDrop }>
           <p>
-            Drag and drop Image or click here{' '}
-            <i className='fa fa-upload' aria-hidden='true' />
+            Drag and drop Image or click here <i className='fa fa-upload' aria-hidden='true' />
             for choose image to upload
           </p>
         </Dropzone>
         <p>Images:</p>
-        {this.props.img._imageIsLoading ? (
+        {this.props.imageIsloading ? (
           <div>
             <Loading />
           </div>
@@ -34,13 +26,8 @@ class Step2 extends Component {
           ''
         )}
 
+        {this.props.event_images.map((item, index) => <img key={index} src={ item } />)}
       </div>
     );
   }
 }
-
-function mapStateToProps({ img }) {
-  return { img };
-}
-
-export default connect(mapStateToProps, actions)(Step2);
