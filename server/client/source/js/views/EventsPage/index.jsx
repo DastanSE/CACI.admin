@@ -21,7 +21,6 @@ class EventsPage extends Component {
   }
 
   render() {
-    console.log('events_data: ', this.state);
     const actions = [
       <FlatButton label='Cancel' primary={ true } onClick={ () => this.setState({ open: false }) } />,
     ];

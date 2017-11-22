@@ -122,8 +122,6 @@ class CreateEvent extends Component {
   render() {
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
-    console.log('index: ', this.state);
-
     return (
       <div className=''>
         <Paper className='create_event' zDepth={ 2 }>
