@@ -41,3 +41,10 @@ export const createEvent = (data) => async dispatch => {
     dispatch(createEventFail(error));
   }
 };
+
+
+export const fetchEvents = () => async dispatch => {
+  const res = await axios.get('api/fetch_events');
+
+  dispatch({ type: AppTypes.FETCH_EVENTS, payload: res.data });
+};

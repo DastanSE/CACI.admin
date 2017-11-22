@@ -15,6 +15,12 @@ export default keyMirror({
   CREATE_EVENT_FAIL: null,
   CREATE_EVENT_SUCCESS: null,
 
+  FETCH_EVENTS: null,
+  FETCH_EVENTS_REQUEST: null,
+  FETCH_EVENTS_FAIL: null,
+  FETCH_EVENTS_SUCCESS: null,
+
+
   CREATE_JOB_REQUEST: null,
   CREATE_JOB_FAIL: null,
   CREATE_JOB_SUCCESS: null,

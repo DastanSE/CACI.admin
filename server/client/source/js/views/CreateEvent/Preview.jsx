@@ -1,5 +1,5 @@
 import React from 'react';
-import MarkdownElement from './MarkdownElement';
+import MarkdownElement from '../../components/Global/MarkdownElement';
 
 export const Preview = props => {
   return (

@@ -17,4 +17,9 @@ module.exports = app => {
 
     res.send(events);
   });
+
+  app.get("/admin/api/fetch_events", async (req, res) => {
+    const events = await Events.find();
+    res.send(events);
+  });
 };
