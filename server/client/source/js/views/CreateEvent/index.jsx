@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { RaisedButton, FlatButton, Paper, TextField } from 'material-ui';
+import { RaisedButton, FlatButton, Paper, TextField, Snackbar } from 'material-ui';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import { Step1 } from './Step1';
 import { Step2 } from './Step2';
 import { Step3 } from './Step3';
+import { Loading } from '../../components/Global/Loading';
+import { Preview } from './Preview';
 
 const OneDayInMs = 24 * 3600 * 1000;
 
@@ -28,6 +30,7 @@ class CreateEvent extends Component {
       event_date: {},
       event_images: this.props.img.imgSrc,
       event_body: '',
+      openSnackbar: false,
     };
   }
 
@@ -81,6 +84,12 @@ class CreateEvent extends Component {
       event_images,
     };
     this.props.createEvent(data);
+    // this.setState({
+    //   title: '',
+    //   event_date: {},
+    //   event_images: [this.props.img.imgSrc,]
+    //   event_body: '',
+    // });
   };
 
   getStepContent(stepIndex) {
@@ -118,7 +127,7 @@ class CreateEvent extends Component {
     return (
       <div className=''>
         <Paper className='create_event' zDepth={ 2 }>
-          <div>
+          <div style={{paddingTop: 5, paddingLeft: 15}}>
             <h3>Create Event</h3>
           </div>
           <Stepper activeStep={ stepIndex }>
@@ -166,6 +175,20 @@ class CreateEvent extends Component {
             )}
           </div>
         </Paper>
+
+        {this.state.stepIndex === 2 ? (
+          <Paper className='create_event' zDepth={ 2 }>
+            <Preview body={ this.state.event_body } />
+          </Paper>
+        ) : (
+          ''
+        )}
+
+        <Snackbar
+          open={ this.state.openSnackbar }
+          message='Event has been created'
+          autoHideDuration={ 4000 }
+        />
       </div>
     );
   }

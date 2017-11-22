@@ -20,8 +20,9 @@ export const Step2 = props => {
       ) : (
         ''
       )}
-
-      {props.event_images.map((item, index) => <img key={ index } src={ item } />)}
+      <div style={{display: 'inline-block'}}>
+        {props.event_images.map((item, index) => <img key={ index } style={{height: 200, width: 200}} src={ item } />)}
+      </div>
     </div>
   );
 };

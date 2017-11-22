@@ -1,11 +1,13 @@
 .hop {
-  position: relative;
+  position: fixed;
   display: flex;
   flex-flow: row wrap;
-  margin: 15em 10em;
+  // margin: 15em 10em;
   padding: 5px 5px 0 5px;
   width: 235px;
   height: 170px;
+  bottom: 3em;
+  right: 1em;
   span {
     position: relative;
     display: block;

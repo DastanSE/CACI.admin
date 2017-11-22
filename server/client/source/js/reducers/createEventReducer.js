@@ -1,6 +1,8 @@
 import AppTypes from '../types/appTypes';
 
 const initialState = {
+  openSnackbar: false,
+  
 };
 
 export default function (state = initialState, action) {

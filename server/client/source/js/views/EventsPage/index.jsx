@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { RaisedButton, FlatButton, Paper, TextField, Dialog } from 'material-ui';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import ReactMarkdown from 'react-markdown';
-
-const input = '# This is a header\n\nAnd this is a paragraph';
 
 export default class EventsPage extends Component {
   constructor(props) {
@@ -48,8 +45,7 @@ export default class EventsPage extends Component {
             <p>tets</p>
             <div>
               <img src='http://res.cloudinary.com/cacicloud/image/upload/v1510129143/partners/support/%E9%A6%99%E6%B8%AF%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6_bk5ilv.png' />
-            </div>
-            <ReactMarkdown source={ input } />
+            </div>          
           </Dialog>
         </Paper>
       </div>

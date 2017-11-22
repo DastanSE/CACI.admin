@@ -73,6 +73,18 @@ const rules = [
     include: iconPath,
   },
   {
+    test: /\.css$/,
+    use: [
+      { loader: 'style-loader' },
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+        },
+      },
+    ],
+  },
+  {
     test: /\.(png|gif|jpg|svg)$/,
     include: imgPath,
     use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
