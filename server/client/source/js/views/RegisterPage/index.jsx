@@ -30,12 +30,7 @@ class RegisterPage extends Component {
       this.props.history.push('/');
     }
   }
-
-  componentDidMount() {
-    if (this.props.auth._isLogin) {
-      this.props.history.push('/');
-    }
-  }
+  
   handleSignIn() {
     const { username, password } = this.state;
     const data = {

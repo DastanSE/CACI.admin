@@ -28,7 +28,8 @@ class Dashboard extends Component {
               </NavLink>
             </MenuItem>
             <MenuItem>
-              <a href='api/logout'>Logout</a>
+
+              <a href='api/logout'><i className='fa fa-power-off' aria-hidden='true' /> Logout</a>
             </MenuItem>
           </Menu>
         </Drawer>
