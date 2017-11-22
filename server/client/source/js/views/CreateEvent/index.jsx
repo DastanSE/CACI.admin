@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
-import { RaisedButton, FlatButton, Paper, TextField } from 'material-ui';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+import { RaisedButton, FlatButton, Paper, TextField, Snackbar } from 'material-ui';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
-import Step1 from './Step1';
-import Step2 from './Step2';
-import Step3 from './Step3';
+import { Step1 } from './Step1';
+import { Step2 } from './Step2';
+import { Step3 } from './Step3';
+import { Loading } from '../../components/Global/Loading';
+import { Preview } from './Preview';
 
+const OneDayInMs = 24 * 3600 * 1000;
 
-export default class CreateEvent extends Component {
+const formatDate = date => {
+  const year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  if (month < 10) month = `0${ month }`;
+  const day = date.getDate();
+
+  return `${ year }-${ month }-${ day }`;
+};
+
+class CreateEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       finished: false,
       stepIndex: 0,
+      title: '',
+      event_date: {},
+      event_images: this.props.img.imgSrc,
+      event_body: '',
+      openSnackbar: false,
     };
   }
 
@@ -23,6 +42,12 @@ export default class CreateEvent extends Component {
     });
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      event_images: nextProps.img.imgSrc,
+    });
+  }
+
   handlePrev = () => {
     const { stepIndex } = this.state;
     if (stepIndex > 0) {
@@ -30,14 +55,65 @@ export default class CreateEvent extends Component {
     }
   };
 
+  onEditText = name => {
+    return event => {
+      this.setState({
+        [name]: event.target.value,
+      });
+    };
+  };
+
+  handleDatePicker = name => {
+    return (event, date) => {
+      this.setState({
+        [name]: date,
+      });
+    };
+  };
+
+  onDrop(files) {
+    this.props.uploadImg(files[0]);
+  }
+
+  handleSubmit = () => {
+    const { title, event_date, event_body, event_images } = this.state;
+    const data = {
+      title,
+      event_date,
+      event_body,
+      event_images,
+    };
+    this.props.createEvent(data);
+    // this.setState({
+    //   title: '',
+    //   event_date: {},
+    //   event_images: [this.props.img.imgSrc,]
+    //   event_body: '',
+    // });
+  };
+
   getStepContent(stepIndex) {
+    const { title, event_date } = this.state;
     switch (stepIndex) {
       case 0:
-        return <Step1 />;
+        return (
+          <Step1
+            title={ title }
+            onEditText={ this.onEditText }
+            event_date={ event_date }
+            onHandleDatePicker={ this.handleDatePicker }
+          />
+        );
       case 1:
-        return <Step2 />;
+        return (
+          <Step2
+            event_images={ this.state.event_images }
+            onDrop={ this.onDrop.bind(this) }
+            imageIsloading={ this.props.img._imageIsLoading }
+          />
+        );
       case 2:
-        return <Step3 />;
+        return <Step3 onEditText={ this.onEditText } event_body={ this.state.event_body } />;
       default:
         return "You're a long way from home sonny jim!";
     }
@@ -46,11 +122,12 @@ export default class CreateEvent extends Component {
   render() {
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
+    console.log('index: ', this.state);
 
     return (
       <div className=''>
         <Paper className='create_event' zDepth={ 2 }>
-          <div>
+          <div style={{paddingTop: 5, paddingLeft: 15}}>
             <h3>Create Event</h3>
           </div>
           <Stepper activeStep={ stepIndex }>
@@ -80,9 +157,7 @@ export default class CreateEvent extends Component {
               </p>
             ) : (
               <div>
-                <div>
-                  {this.getStepContent(stepIndex)}
-                </div>
+                <div>{this.getStepContent(stepIndex)}</div>
                 <div style={ { marginTop: 12 } }>
                   <FlatButton
                     label='Back'
@@ -93,14 +168,34 @@ export default class CreateEvent extends Component {
                   <RaisedButton
                     label={ stepIndex === 2 ? 'Submit' : 'Next' }
                     primary={ true }
-                    onClick={ this.handleNext }
+                    onClick={ stepIndex === 2 ? this.handleSubmit : this.handleNext }
                   />
                 </div>
               </div>
             )}
           </div>
         </Paper>
+
+        {this.state.stepIndex === 2 ? (
+          <Paper className='create_event' zDepth={ 2 }>
+            <Preview body={ this.state.event_body } />
+          </Paper>
+        ) : (
+          ''
+        )}
+
+        <Snackbar
+          open={ this.state.openSnackbar }
+          message='Event has been created'
+          autoHideDuration={ 4000 }
+        />
       </div>
     );
   }
 }
+
+function mapStateToProps({ img }) {
+  return { img };
+}
+
+export default connect(mapStateToProps, actions)(CreateEvent);

@@ -22,7 +22,7 @@ function signUpSuccess(data) {
 
 function signUpFail(error) {
   return {
-    type: AppTypes.SESSION_AUTHORIZE_FAIL,
+    type: AppTypes.SIGN_UP_FAIL,
     payload: {
       ...error,
       _isSignUp: false,

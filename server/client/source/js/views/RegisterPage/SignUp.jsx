@@ -10,6 +10,7 @@ class SignUp extends Component {
       open: false,
       signUpPasswordType: 'password',
       username: '',
+      usernameError: '',
       password1: '',
       password2: '',
       errorText: '',
@@ -26,6 +27,11 @@ class SignUp extends Component {
   };
 
   handleSignup() {
+    if(this.state.username === ''){
+      this.setState({
+        usernameError: 'Should not be empty'
+      })
+    }
     if (!(this.state.password1 && this.state.password2)) {
       this.setState({
         errorText: 'Should not be empty',
@@ -83,6 +89,7 @@ class SignUp extends Component {
           <TextField
             floatingLabelText='Username'
             name='username'
+            errorText={ this.state.usernameError }
             onChange={ this.onEditText('username') }
           />
           <br />

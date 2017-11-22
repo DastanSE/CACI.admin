@@ -73,6 +73,18 @@ const rules = [
     include: iconPath,
   },
   {
+    test: /\.css$/,
+    use: [
+      { loader: 'style-loader' },
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+        },
+      },
+    ],
+  },
+  {
     test: /\.(png|gif|jpg|svg)$/,
     include: imgPath,
     use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
@@ -161,7 +173,7 @@ module.exports = {
     host: '0.0.0.0',
     proxy: [
       {
-        context: ['/register/api', '/api'],
+        context: ['/register/api', '/api', '/admin/api'],
         target: 'http://localhost:5000',
       },
     ],

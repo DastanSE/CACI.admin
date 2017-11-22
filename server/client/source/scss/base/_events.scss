@@ -1,0 +1,72 @@
+/* EventCard Start */
+.event-card {
+  margin: 20px;
+  width: 260px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.25s;
+}
+.event-card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.event-card-img {
+  padding: 4px;
+  width: 100%;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom: 1px solid #f0f0f0;
+  display: block;
+  overflow: hidden;
+}
+.event-card-img img {
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.25s ease;
+}
+.event-card-content {
+  padding: 15px;
+  text-align: left;
+}
+.event-card-title {
+  margin-top: 0px;
+  font-weight: 500;
+  font-size: 1.3em;
+}
+.event-card-title a {
+  color: #5f5f5f;
+  text-decoration: none !important;
+}
+.event-card-read-more {
+  border-top: 1px solid #d4d4d4;
+  display: block;
+  height: 80px;
+}
+.event-card-read-more .fa {
+  padding: 10px;
+  margin: 20px 5px;
+  border: 2px solid #f0f0f0;
+  border-radius: 50%;
+  &:hover {
+    color: rgb(85, 159, 255);
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  &.fa-facebook {
+    width: 37px;
+    padding-left: 12px;
+  }
+}
+.event-card-read-more a {
+  display: inline-block;
+  text-decoration: none !important;
+  font-weight: 600;
+  color: #5f5f5f;
+  text-transform: uppercase;
+  &:hover {
+    color: rgb(85, 159, 255);
+    transform: scale(1.1);
+  }
+}
+/* EventCard End */

@@ -1,31 +1,26 @@
 import AppTypes from '../types/appTypes';
 
 const initialState = {
-  _isLogin: false,
-  errorMessage: '',
-  _isSignUp: false,
-  usernameError: '',
+  openSnackbar: false,
   
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case AppTypes.SIGN_UP_REQUEST:
+    case AppTypes.CREATE_EVENT_REQUEST:
+      state = {
+        ...state,
+
+      };
+      break;
+    case AppTypes.CREATE_EVENT_FAIL:
       state = {
         ...state,
       };
       break;
-    case AppTypes.SIGN_UP_FAIL:
+    case AppTypes.CREATE_EVENT_SUCCESS:
       state = {
         ...state,
-        error: action.payload.error,
-      };
-      break;
-    case AppTypes.SIGN_UP:
-      state = {
-        ...state,
-        _isLogin: action.payload._isLogin,
-        data: action.payload.data,
       };
       break;
   }
