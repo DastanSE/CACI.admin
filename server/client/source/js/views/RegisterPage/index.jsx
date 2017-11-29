@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import SignUp from './SignUp';
 
-import { Loading } from '../../components/Global/Loading';
-
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +28,7 @@ class RegisterPage extends Component {
       this.props.history.push('/');
     }
   }
-  
+
   handleSignIn() {
     const { username, password } = this.state;
     const data = {
@@ -45,7 +43,7 @@ class RegisterPage extends Component {
     return (
       <div className='login-page'>
         <Paper className='login-container' zDepth={ 2 }>
-          <img src='../../../assets/img/logo.png' />
+          <img src='https://res.cloudinary.com/cacicloud/image/upload/v1511922616/logo_rvlqgl.png' />
           <Route
             exact
             path={ match.url }
