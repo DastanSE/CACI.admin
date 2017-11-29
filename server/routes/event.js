@@ -20,8 +20,6 @@ module.exports = app => {
 
   app.get("/admin/api/fetch_events", async (req, res) => {
     const events = await Events.find();
-    res.header("Access-Control-Allow-Methods", "GET");
-    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
-    res.send(events.json());
+    res.send(events);
   });
 };
