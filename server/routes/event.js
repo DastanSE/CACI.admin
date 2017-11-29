@@ -19,7 +19,7 @@ module.exports = app => {
     res.send(events);
   });
 
-  app.get("/admin/api/fetch_events", cors,async (req, res) => {
+  app.get("/admin/api/fetch_events", cors(),async (req, res) => {
     const events = await Events.find();
     res.send(events);
   });
