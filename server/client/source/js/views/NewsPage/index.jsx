@@ -12,6 +12,8 @@ import {
   Avatar,
 } from 'material-ui';
 import PlusIcon from 'material-ui/svg-icons/content/add';
+import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 
 const NEWS = [
@@ -19,7 +21,8 @@ const NEWS = [
     img:
       'https://res.cloudinary.com/cacicloud/image/upload/v1512111966/ad-sport-tale-of-the-tape1_uudmpb.jpg',
     title: 'Dastan had first bilion',
-    introduce: 'blablablablablablablablablablablablablabla',
+    introduce:
+      'blablablablablablablablablablablablablabla blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablab blablablablablablablabs blablablablablablablablablablablablablablablablablablablablablablablablablablablabla blablablablablablablablablablablablablabla blablablablablablablablablablablablablabla blablablablablablablablabla blablablablabblablablablabblablablablabblablablablab blablablablab blablablablab blablablablab blablablablab la blablablablablablablablablablablablablabla',
     link:
       'https://www.today.com/news/plugging-space-heater-power-strip-can-be-disastrous-here-s-t119463',
   },
@@ -77,26 +80,20 @@ class NewsPage extends Component {
           {NEWS.map((data, index) => (
             <div className='news-list-container' key={ index }>
               <ListItem
-                innerDivStyle={ { padding: '20px 10px 16px 151px', height: '150px' } }
-                leftAvatar={
-                  <img
-                    style={ {
-                      position: 'absolute',
-                      left: '0',
-                      top: '0',
-                      width: '150px',
-                      height: '150px',
-                    } }
-                    src={ data.img }
-                  />
+                innerDivStyle={ { padding: '3px' } }
+                primaryText={
+                  <div style={ { display: 'flex', justifyContent: 'space-between' } }>
+                    <h3 style={{margin: '7px 0 0 0', padding: 0}}>{data.title}</h3>
+                    <span style={{margin: '2px 50px 0 0'}}>
+                      <FlatButton label='Edit' primary icon={ <EditIcon /> } />
+                      <FlatButton label='Delete' secondary icon={ <DeleteIcon /> } />
+                    </span>
+                  </div>
                 }
-                primaryText={ <h3 style={ { margin: '10px' } }>{data.title}</h3> }
                 nestedItems={ [
                   <div className='news-box'>
+                    <img src={ data.img } />
                     <p>{data.introduce}</p>
-
-                    <FlatButton label='Delete' />
-                    <FlatButton label='Edit' />
                     <a href={ data.link }>More</a>
                   </div>,
                 ] }
