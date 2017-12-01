@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 import MainPage from 'views/MainPage';
 import RegisterPage from 'views/RegisterPage';
 import Dashboard from 'views/Dashboard';
+import LoggedInLayout from 'views/LoggedInLayout';
 import Menu from 'components/Global/Menu';
+
 
 const publicPath = '/';
 const adminPath = '/admin';
@@ -53,20 +55,11 @@ class App extends Component {
                 ) }
             />
             <Route path={ routeCodes.REGISTERPAGE } component={ RegisterPage } />
-            <Route path={ routeCodes.ADMINPAGE } onEnter={ requireAuth } component={ Dashboard } />
+            <Route path={ routeCodes.ADMINPAGE } component={ LoggedInLayout } />
           </Switch>
         </div>
       </BrowserRouter>
     );
-  }
-}
-
-function requireAuth(nextState, replace) {
-  if (!this.props._isLogin) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname },
-    });
   }
 }
 
