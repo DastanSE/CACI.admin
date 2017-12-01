@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import {
-  RaisedButton,
-  FlatButton,
-  Paper,
-  TextField,
-  Divider,
-  Dialog,
-  FontIcon,
-  Avatar,
-} from 'material-ui';
+import { FlatButton, Paper, Dialog, Avatar } from 'material-ui';
 import PlusIcon from 'material-ui/svg-icons/content/add';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
+import CreateNews  from './CreateNews';
 
 const NEWS = [
   {
@@ -44,7 +36,6 @@ class NewsPage extends Component {
     };
   }
 
-  componentDidMount() {}
 
   render() {
     const actions = [
@@ -73,7 +64,7 @@ class NewsPage extends Component {
           ] }
           autoScrollBodyContent={ true }
         >
-          <p>News test</p>
+          <CreateNews />
         </Dialog>
 
         <List>
@@ -83,8 +74,8 @@ class NewsPage extends Component {
                 innerDivStyle={ { padding: '3px' } }
                 primaryText={
                   <div style={ { display: 'flex', justifyContent: 'space-between' } }>
-                    <h3 style={{margin: '7px 0 0 0', padding: 0}}>{data.title}</h3>
-                    <span style={{margin: '2px 50px 0 0'}}>
+                    <h3 style={ { margin: '7px 0 0 0', padding: 0 } }>{data.title}</h3>
+                    <span style={ { margin: '2px 50px 0 0' } }>
                       <FlatButton label='Edit' primary icon={ <EditIcon /> } />
                       <FlatButton label='Delete' secondary icon={ <DeleteIcon /> } />
                     </span>
@@ -97,10 +88,6 @@ class NewsPage extends Component {
                     <a href={ data.link }>More</a>
                   </div>,
                 ] }
-                nestedListStyle={ {
-                  marginRight: 0,
-                  bacgroundColor: '#ddd',
-                } }
               />
             </div>
           ))}
