@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 import { RaisedButton, FlatButton, Paper, TextField, Snackbar } from 'material-ui';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import { Step1 } from './Step1';
 import { Step2 } from './Step2';
 import { Step3 } from './Step3';
-import { Loading } from '../../components/Global/Loading';
+import { Loading } from '../../../components/Global/Loading';
 import { Preview } from './Preview';
 
 class CreateEvent extends Component {
