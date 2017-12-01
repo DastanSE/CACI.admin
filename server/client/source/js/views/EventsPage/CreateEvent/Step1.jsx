@@ -9,6 +9,12 @@ export const Step1 = props => {
         value={ props.title }
         onChange={ props.onEditText('title') }
       />
+      {/* <TextField
+        style={{marginLeft: '2em'}}
+        hintText='Set Subtitle'
+        value={ props.title }
+        onChange={ props.onEditText('Subtitle') }
+      /> */}
       <DatePicker
         hintText='Choose event date'
         value={ props.event_date }

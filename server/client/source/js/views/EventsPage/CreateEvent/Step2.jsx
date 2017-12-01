@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { Loading } from '../../components/Global/Loading';
+import { Loading } from '../../../components/Global/Loading';
 
 export const Step2 = props => {
   return (

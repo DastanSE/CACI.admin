@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 import { RaisedButton, FlatButton, Paper, TextField, Snackbar } from 'material-ui';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import { Step1 } from './Step1';
 import { Step2 } from './Step2';
 import { Step3 } from './Step3';
-import { Loading } from '../../components/Global/Loading';
+import { Loading } from '../../../components/Global/Loading';
 import { Preview } from './Preview';
-
-const OneDayInMs = 24 * 3600 * 1000;
-
-const formatDate = date => {
-  const year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  if (month < 10) month = `0${ month }`;
-  const day = date.getDate();
-
-  return `${ year }-${ month }-${ day }`;
-};
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -28,9 +17,8 @@ class CreateEvent extends Component {
       stepIndex: 0,
       title: '',
       event_date: {},
-      event_images: this.props.img.imgSrc,
+      event_images: props.img.imgSrc,
       event_body: '',
-      openSnackbar: false,
     };
   }
 
@@ -84,13 +72,17 @@ class CreateEvent extends Component {
       event_images,
     };
     this.props.createEvent(data);
-    // this.setState({
-    //   title: '',
-    //   event_date: {},
-    //   event_images: [this.props.img.imgSrc,]
-    //   event_body: '',
-    // });
+    this.resetState();
   };
+
+  resetState() {
+    this.setState({
+      title: '',
+      event_date: {},
+      event_images: [],
+      event_body: '',
+    });
+  }
 
   getStepContent(stepIndex) {
     const { title, event_date } = this.state;
@@ -120,12 +112,13 @@ class CreateEvent extends Component {
   }
 
   render() {
+    console.log('create event props: ', this.props);
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     return (
       <div className=''>
         <Paper className='create_event' zDepth={ 2 }>
-          <div style={{paddingTop: 5, paddingLeft: 15}}>
+          <div style={ { paddingTop: 5, paddingLeft: 15 } }>
             <h3>Create Event</h3>
           </div>
           <Stepper activeStep={ stepIndex }>
@@ -183,17 +176,17 @@ class CreateEvent extends Component {
         )}
 
         <Snackbar
-          open={ this.state.openSnackbar }
+          open={ this.props.createEventReducer.openCreateEventSnackbar }
           message='Event has been created'
-          autoHideDuration={ 4000 }
+          autoHideDuration={ 3000 }
         />
       </div>
     );
   }
 }
 
-function mapStateToProps({ img }) {
-  return { img };
+function mapStateToProps({ img, createEventReducer }) {
+  return { img, createEventReducer };
 }
 
 export default connect(mapStateToProps, actions)(CreateEvent);

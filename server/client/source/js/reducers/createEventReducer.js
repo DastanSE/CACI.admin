@@ -1,8 +1,8 @@
 import AppTypes from '../types/appTypes';
 
 const initialState = {
-  openSnackbar: false,
-  
+  openCreateEventSnackbar: false,
+
 };
 
 export default function (state = initialState, action) {
@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
       break;
     case AppTypes.CREATE_EVENT_SUCCESS:
       state = {
-        ...state,
+        openCreateEventSnackbar: true,
       };
       break;
   }
