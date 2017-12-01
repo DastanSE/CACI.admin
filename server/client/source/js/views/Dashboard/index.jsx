@@ -42,7 +42,7 @@ class Dashboard extends Component {
         <div style={ { marginLeft: 300 } }>
           <Route path={ `${ match.url }/events` } component={ EventsPage } />
           <Route path={ `${ match.url }/jobs` } component={ JobsPage } />
-          <Route path={ `${ match.url }/news` } component={ JobsPage } />
+          <Route path={ `${ match.url }/news` } component={ NewsPage } />
           <Route exact path={ match.url } render={ () => <h3>Dashboard</h3> } />
         </div>
       </div>
