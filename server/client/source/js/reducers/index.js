@@ -6,6 +6,7 @@ import eventsReducer from './eventsReducer';
 import createEventReducer from './createEventReducer';
 import jobsReducer from './jobsReducer';
 import newsReducer from './newsReducer';
+import repertoireReducer from './repertoireReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   createEventReducer,
   jobs: jobsReducer,
   news: newsReducer,
+  repertoire: repertoireReducer,
 });

@@ -1,0 +1,26 @@
+.cards {
+  border: 1px solid #ddd;
+  width: 300px;
+
+  margin: 5px;
+  display: inline-block;
+  padding: 10px 24px 0;
+  .type {
+    background-color: #c52d2f;
+    color: #fff;
+    padding: 1px 4px;
+  }
+  .box2 {
+    overflow: hidden;
+    width: 252px;
+
+    border: 1px solid #ddd;
+    img {
+      width: 100%;
+    }
+  }
+  h4 {
+    font-size: 18px;
+    margin: 10px auto;
+  }
+}

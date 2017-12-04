@@ -4,3 +4,4 @@ export * from './signUpAction';
 export * from './eventAction';
 export * from './jobsAction';
 export * from './newsAction';
+export * from './repertoireAction';

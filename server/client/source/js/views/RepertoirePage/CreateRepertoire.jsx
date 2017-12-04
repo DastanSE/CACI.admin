@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import { SelectField, MenuItem, TextField, DatePicker } from 'material-ui';
+import Dropzone from 'react-dropzone';
 
 export const CreateRepertoire = props => {
+  console.log(props);
   return (
     <div>
       <TextField
         hintText='Set title'
-        value={ props.title }
+        value={ props.repertoire_title }
         style={ { display: 'block' } }
-        onChange={ props.onEditText('title') }
+        onChange={ props.onEditText('repertoire_title') }
         floatingLabelText='Set title'
       />
       <DatePicker
         hintText='Choose date'
-        value={ props.date }
-        onChange={ props.onHandleDatePicker('date') }
+        value={ props.repertoire_date }
+        onChange={ props.onHandleDatePicker('repertoire_date') }
       />
+      <Dropzone onDrop={ props.onDrop }>
+        <p>
+          Drag and drop Image or click here <i className='fa fa-upload' aria-hidden='true' />
+          for choose image to upload
+        </p>
+      </Dropzone>
       <SelectField
         floatingLabelText='Type'
-        value={ props.type }
-        onChange={ props.onHandleSelectField('type') }
+        value={ props.repertoire_type }
+        onChange={ props.onHandleSelectField('repertoire_type') }
       >
         <MenuItem value={ '舞蹈' } primaryText='舞蹈' />
         <MenuItem value={ '戲劇' } primaryText='戲劇' />
@@ -35,9 +43,9 @@ export const CreateRepertoire = props => {
       </SelectField>
       <SelectField
         floatingLabelText='Cities'
-        value={ props.city }
+        value={ props.repertoire_city }
         style={ { marginLeft: '20px' } }
-        onChange={ props.onHandleSelectField('city') }
+        onChange={ props.onHandleSelectField('repertoire_city') }
       >
         <MenuItem value={ '北京' } primaryText='北京' />
         <MenuItem value={ '上海' } primaryText='上海' />
@@ -60,8 +68,8 @@ export const CreateRepertoire = props => {
           floatingLabelText='Write your Repertoire discription in Markdown'
           multiLine={ true }
           rows={ 10 }
-          value={ props.discription }
-          onChange={ props.onEditText('discription') }
+          value={ props.repertoire_discription }
+          onChange={ props.onEditText('repertoire_discription') }
           fullWidth={ true }
         />
       </div>

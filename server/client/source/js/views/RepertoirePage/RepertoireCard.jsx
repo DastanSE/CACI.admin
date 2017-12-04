@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { SelectField, MenuItem, TextField, DatePicker } from 'material-ui';
+import { FlatButton } from 'material-ui';
+import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 
 export const RepertoireCard = props => {
   return (
-    <div>
-      <article className='jumu-cards'>
-       <a className='link-wrap2' href='' target='_blank'>
-         <div className='img-box2'>
-           <p className='type'>{props.type}</p>
-           <p className='time' />
-           <img src={props.imgSrc} alt='images' width='370' height='200' />
-         </div>
-         <div className='height-limiter'>
-           <h4 />
-         </div>
-       </a>
-     </article>
+    <div className='cards'>
+      <div className='box2'>
+        <span className='type'>{props.data.repertoire_type}</span>
+        <p className='time'>{props.data.repertoire_date}</p>
+        <img src={ props.data.repertoire_imgSrc } alt='images' />
+      </div>
+      <div className='height-limiter'>
+        <h4>{props.data.repertoire_title}</h4>
+      </div>
+      <FlatButton label='Edit' primary icon={ <EditIcon /> } />
+      <FlatButton label='Delete' secondary icon={ <DeleteIcon /> } />
     </div>
   );
 };
