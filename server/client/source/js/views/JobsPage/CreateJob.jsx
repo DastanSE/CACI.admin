@@ -6,15 +6,15 @@ export const CreateJob = props => {
     <div>
       <TextField
         hintText='Set title'
-        value={ props.title }
+        value={ props.job_title }
         style={ { display: 'block' } }
-        onChange={ props.onEditText('title') }
+        onChange={ props.onEditText('job_title') }
         floatingLabelText='Set title'
       />
       <SelectField
         floatingLabelText='Job Type'
-        value={ props.type }
-        onChange={ props.onHandleSelectField('type') }
+        value={ props.job_type }
+        onChange={ props.onHandleSelectField('job_type') }
       >
         <MenuItem value={ '实习' } primaryText='实习' />
         <MenuItem value={ '全职' } primaryText='全职' />
@@ -24,9 +24,9 @@ export const CreateJob = props => {
       </SelectField>
       <SelectField
         floatingLabelText='选择工作经验'
-        value={ props.experience }
+        value={ props.job_experience }
         style={ { marginLeft: '20px' } }
-        onChange={ props.onHandleSelectField('experience') }
+        onChange={ props.onHandleSelectField('job_experience') }
       >
         <MenuItem value={ '不限经验' } primaryText='不限经验' />
         <MenuItem value={ '有经验' } primaryText='有经验' />
@@ -41,8 +41,8 @@ export const CreateJob = props => {
           floatingLabelText='Write your jobs discription in Markdown'
           multiLine={ true }
           rows={ 10 }
-          value={ props.discription }
-          onChange={ props.onEditText('discription') }
+          value={ props.job_discription }
+          onChange={ props.onEditText('job_discription') }
           fullWidth={ true }
         />
       </div>

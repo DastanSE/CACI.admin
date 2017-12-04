@@ -46,11 +46,15 @@ class JobsPage extends Component {
     this.state = {
       createNewJobOpen: false,
       resultModal: false,
-      title: '',
-      type: '',
-      discription: '',
-      experience: '',
+      job_title: '',
+      job_type: '',
+      job_discription: '',
+      job_experience: '',
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchJobs();
   }
 
   onEditText = name => {
@@ -67,11 +71,29 @@ class JobsPage extends Component {
     };
   };
 
+  handleSubmit = () => {
+    const { job_title, job_type, job_discription, job_experience } = this.state;
+    const data = {
+      job_title,
+      job_type,
+      job_discription,
+      job_experience,
+    };
+    this.props.createJob(data);
+    this.resetState();
+  };
+
+  resetState() {
+    this.setState({
+      job_title: '',
+      job_type: '',
+      job_discription: '',
+      job_experience: '',
+    });
+  }
+
   render() {
-    const actions = [
-      <FlatButton label='Cancel' primary={ true } onClick={ () => this.setState({ open: false }) } />,
-    ];
-    console.log(this.state);
+    console.log(this.props);
     return (
       <Paper zDepth={ 2 } style={ { padding: '10px', margin: 10 } }>
         <div style={ { display: 'flex', justifyContent: 'space-between' } }>
@@ -93,13 +115,17 @@ class JobsPage extends Component {
               primary={ true }
             />,
           ] }
-        >
-          
-        </Dialog>
+        />
         <Dialog
           title='Create New Job'
           open={ this.state.createNewJobOpen }
           actions={ [
+            <FlatButton
+              key={ 1124 }
+              label='Submit'
+              onClick={ () => this.handleSubmit() }
+              primary={ true }
+            />,
             <FlatButton
               key={ 11234 }
               label='Close'
@@ -111,14 +137,14 @@ class JobsPage extends Component {
         >
           <CreateJob
             onEditText={ this.onEditText }
-            title={ this.state.title }
-            type={ this.state.type }
-            discription={ this.state.discription }
-            experience={ this.state.experience }
+            job_title={ this.state.job_title }
+            job_type={ this.state.job_type }
+            job_discription={ this.state.job_discription }
+            job_experience={ this.state.job_experience }
             onHandleSelectField={ this.handleSelectFieldChange }
           />
           <p>Jobs Markdown Result</p>
-          <MarkdownElement text={ this.state.discription } />
+          <MarkdownElement text={ this.state.job_discription } />
         </Dialog>
 
         <Table fixedHeader fixedFooter selectable={ false }>
@@ -141,18 +167,18 @@ class JobsPage extends Component {
             showRowHover
             stripedRows
           >
-            {tableData.map((data, index) => (
+            {this.props.jobs.jobs.map((data, index) => (
               <TableRow key={ index }>
                 <TableRowColumn>
                   <span
                     style={ { cursor: 'pointer' } }
                     onClick={ () => this.setState({ resultModal: true }) }
                   >
-                    {data.title}
+                    {data.job_title}
                   </span>
                 </TableRowColumn>
-                <TableRowColumn>{data.experience}</TableRowColumn>
-                <TableRowColumn>{data.type}</TableRowColumn>
+                <TableRowColumn>{data.job_experience}</TableRowColumn>
+                <TableRowColumn>{data.job_type}</TableRowColumn>
                 <TableRowColumn>
                   <IconButton>
                     <EditIcon />
@@ -170,9 +196,8 @@ class JobsPage extends Component {
   }
 }
 
-
-function mapStateToProps({ events }) {
-  return { events };
+function mapStateToProps({ jobs }) {
+  return { jobs };
 }
 
 export default connect(mapStateToProps, actions)(JobsPage);

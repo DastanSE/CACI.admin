@@ -7,6 +7,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import { CreateRepertoire } from './CreateRepertoire';
 import MarkdownElement from '../../components/Global/MarkdownElement';
+import { RepertoireCard } from './RepertoireCard';
 
 class RepertoirePage extends Component {
   constructor(props) {
@@ -48,7 +49,6 @@ class RepertoirePage extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <Paper zDepth={ 2 } style={ { padding: '10px', margin: 10 } }>
         <div style={ { display: 'flex', justifyContent: 'space-between' } }>
@@ -86,9 +86,10 @@ class RepertoirePage extends Component {
           />
 
           <span>Markdown</span>
-          <hr/>
+          <hr />
           <MarkdownElement text={ this.state.discription } />
         </Dialog>
+        <RepertoireCard />
       </Paper>
     );
   }

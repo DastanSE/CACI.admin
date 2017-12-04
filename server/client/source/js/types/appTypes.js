@@ -24,6 +24,8 @@ export default keyMirror({
   CREATE_JOB_REQUEST: null,
   CREATE_JOB_FAIL: null,
   CREATE_JOB_SUCCESS: null,
+  FETCH_JOBS: null,
+
 
   CREATE_NEWS_REQUEST: null,
   CREATE_NEWS_FAIL: null,
