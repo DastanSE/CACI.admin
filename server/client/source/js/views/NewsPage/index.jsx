@@ -71,6 +71,7 @@ class NewsPage extends Component {
           {NEWS.map((data, index) => (
             <div className='news-list-container' key={ index }>
               <ListItem
+                key={Math.random()}
                 innerDivStyle={ { padding: '3px' } }
                 primaryText={
                   <div style={ { display: 'flex', justifyContent: 'space-between' } }>

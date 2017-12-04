@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import MarkdownElement from '../../components/Global/MarkdownElement';
-import {
-  RaisedButton,
-  FlatButton,
-  IconButton,
-  Paper,
-  TextField,
-  Dialog,
-  FontIcon,
-  Divider,
-} from 'material-ui';
+import { RaisedButton, FlatButton, IconButton, Paper, Dialog } from 'material-ui';
 import PlusIcon from 'material-ui/svg-icons/content/add';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
@@ -20,23 +11,11 @@ import { CreateJob } from './CreateJob';
 import {
   Table,
   TableBody,
-  TableFooter,
   TableHeader,
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-
-const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0',
-  },
-  propToggleHeader: {
-    margin: '20px auto 10px',
-  },
-};
 
 const tableData = [
   {
@@ -66,6 +45,7 @@ class JobsPage extends Component {
     super(props);
     this.state = {
       createNewJobOpen: false,
+      resultModal: false,
       title: '',
       type: '',
       discription: '',
@@ -104,10 +84,24 @@ class JobsPage extends Component {
           />
         </div>
         <Dialog
+          title='Job description result'
+          open={ this.state.resultModal }
+          actions={ [
+            <FlatButton
+              label='Close'
+              onClick={ () => this.setState({ resultModal: false }) }
+              primary={ true }
+            />,
+          ] }
+        >
+          
+        </Dialog>
+        <Dialog
           title='Create New Job'
           open={ this.state.createNewJobOpen }
           actions={ [
             <FlatButton
+              key={ 11234 }
               label='Close'
               onClick={ () => this.setState({ createNewJobOpen: false }) }
               primary={ true }
@@ -149,7 +143,14 @@ class JobsPage extends Component {
           >
             {tableData.map((data, index) => (
               <TableRow key={ index }>
-                <TableRowColumn>{data.title}</TableRowColumn>
+                <TableRowColumn>
+                  <span
+                    style={ { cursor: 'pointer' } }
+                    onClick={ () => this.setState({ resultModal: true }) }
+                  >
+                    {data.title}
+                  </span>
+                </TableRowColumn>
                 <TableRowColumn>{data.experience}</TableRowColumn>
                 <TableRowColumn>{data.type}</TableRowColumn>
                 <TableRowColumn>
@@ -168,6 +169,7 @@ class JobsPage extends Component {
     );
   }
 }
+
 
 function mapStateToProps({ events }) {
   return { events };

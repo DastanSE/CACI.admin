@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { RaisedButton, FlatButton, SelectField, MenuItem, TextField, Snackbar } from 'material-ui';
-import { Loading } from '../../components/Global/Loading';
+import { SelectField, MenuItem, TextField } from 'material-ui';
 
 export const CreateJob = props => {
   return (
