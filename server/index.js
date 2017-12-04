@@ -33,6 +33,7 @@ app.use(passport.session());
 require("./routes/auth")(app);
 require("./routes/event")(app);
 require("./routes/jobs")(app);
+require("./routes/news")(app);
 
 
 if (process.env.NODE_ENV === "production") {

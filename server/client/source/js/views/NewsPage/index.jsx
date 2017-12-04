@@ -6,7 +6,7 @@ import PlusIcon from 'material-ui/svg-icons/content/add';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
-import CreateNews  from './CreateNews';
+import { CreateNews } from './CreateNews';
 
 const NEWS = [
   {
@@ -33,14 +33,59 @@ class NewsPage extends Component {
     super(props);
     this.state = {
       createNewNewsOpen: false,
+      news_title: '',
+      news_introduction: '',
+      news_link: '',
+      news_imgSrc: '',
     };
   }
 
+  onEditText = name => {
+    return event => {
+      this.setState({
+        [name]: event.target.value,
+      });
+    };
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      news_imgSrc: nextProps.img.imgSrc[0],
+    });
+  }
+
+  componentDidMount() {
+    this.props.fetchNews();
+  }
+
+  onDrop(files) {
+    this.props.uploadImg(files[0]);
+  }
+
+  handleSubmit = () => {
+    const { news_title, news_introduction, news_link, news_imgSrc } = this.state;
+    const data = {
+      news_title,
+      news_introduction,
+      news_link,
+      news_imgSrc,
+    };
+    this.props.createNews(data);
+    this.resetState();
+  };
+
+  resetState() {
+    this.setState({
+      news_title: '',
+      news_introduction: '',
+      news_link: '',
+      news_imgSrc: '',
+    });
+  }
 
   render() {
-    const actions = [
-      <FlatButton label='Cancel' primary={ true } onClick={ () => this.setState({ open: false }) } />,
-    ];
+    console.log(this.props.img);
+    console.log(this.state);
     return (
       <Paper zDepth={ 2 } style={ { padding: '10px', margin: 10 } }>
         <div style={ { display: 'flex', justifyContent: 'space-between' } }>
@@ -57,6 +102,11 @@ class NewsPage extends Component {
           open={ this.state.createNewNewsOpen }
           actions={ [
             <FlatButton
+              label='SUBMIT'
+              onClick={ this.handleSubmit }
+              primary={ true }
+            />,
+            <FlatButton
               label='Close'
               onClick={ () => this.setState({ createNewNewsOpen: false }) }
               primary={ true }
@@ -64,18 +114,25 @@ class NewsPage extends Component {
           ] }
           autoScrollBodyContent={ true }
         >
-          <CreateNews />
+          <CreateNews
+            news_title={ this.state.news_title }
+            news_introduction={ this.state.news_introduction }
+            news_link={ this.state.news_link }
+            news_imgSrc={ this.state.news_imgSrc }
+            onDrop={ this.onDrop.bind(this) }
+            onEditText={ this.onEditText }
+          />
         </Dialog>
 
         <List>
-          {NEWS.map((data, index) => (
+          {this.props.news.news.map((data, index) => (
             <div className='news-list-container' key={ index }>
               <ListItem
-                key={Math.random()}
+                key={ Math.random() }
                 innerDivStyle={ { padding: '3px' } }
                 primaryText={
                   <div style={ { display: 'flex', justifyContent: 'space-between' } }>
-                    <h3 style={ { margin: '7px 0 0 0', padding: 0 } }>{data.title}</h3>
+                    <h3 style={ { margin: '7px 0 0 0', padding: 0 } }>{data.news_title}</h3>
                     <span style={ { margin: '2px 50px 0 0' } }>
                       <FlatButton label='Edit' primary icon={ <EditIcon /> } />
                       <FlatButton label='Delete' secondary icon={ <DeleteIcon /> } />
@@ -84,9 +141,9 @@ class NewsPage extends Component {
                 }
                 nestedItems={ [
                   <div className='news-box'>
-                    <img src={ data.img } />
-                    <p>{data.introduce}</p>
-                    <a href={ data.link }>More</a>
+                    <img src={ data.news_imgSrc } />
+                    <p>{data.news_introduction}</p>
+                    <a href={ data.news_link }>More</a>
                   </div>,
                 ] }
               />
@@ -98,8 +155,8 @@ class NewsPage extends Component {
   }
 }
 
-function mapStateToProps({ events }) {
-  return { events };
+function mapStateToProps({ img, news }) {
+  return { img, news };
 }
 
 export default connect(mapStateToProps, actions)(NewsPage);
