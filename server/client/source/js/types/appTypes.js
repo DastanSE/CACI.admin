@@ -24,10 +24,13 @@ export default keyMirror({
   CREATE_JOB_REQUEST: null,
   CREATE_JOB_FAIL: null,
   CREATE_JOB_SUCCESS: null,
+  FETCH_JOBS: null,
+
 
   CREATE_NEWS_REQUEST: null,
   CREATE_NEWS_FAIL: null,
   CREATE_NEWS_SUCCESS: null,
+  FETCH_NEWS: null,
 
   UPLOAD_IMG_REQUEST: null,
   UPLOAD_IMG_FAIL: null,

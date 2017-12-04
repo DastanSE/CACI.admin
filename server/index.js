@@ -12,6 +12,7 @@ mongoose.connect(keys.mongoURI, { useMongoClient: true });
 const app = express();
 const User = mongoose.model("users");
 
+
 cloudinary.config({
   cloud_name: 'cacicloud',
   api_key: keys.cloudinaryApiKey,
@@ -31,6 +32,8 @@ app.use(passport.session());
 
 require("./routes/auth")(app);
 require("./routes/event")(app);
+require("./routes/jobs")(app);
+require("./routes/news")(app);
 
 
 if (process.env.NODE_ENV === "production") {

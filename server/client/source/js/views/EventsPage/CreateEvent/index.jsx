@@ -7,7 +7,7 @@ import { Step1 } from './Step1';
 import { Step2 } from './Step2';
 import { Step3 } from './Step3';
 import { Loading } from '../../../components/Global/Loading';
-import { Preview } from './Preview';
+import { Preview } from '../../../components/Global/Preview';
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -169,7 +169,7 @@ class CreateEvent extends Component {
 
         {this.state.stepIndex === 2 ? (
           <Paper className='create_event' zDepth={ 2 }>
-            <Preview body={ this.state.event_body } />
+            <Preview markdown={ this.state.event_body } />
           </Paper>
         ) : (
           ''
