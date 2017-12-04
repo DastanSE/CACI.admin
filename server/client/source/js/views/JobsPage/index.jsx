@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import MarkdownElement from '../../components/Global/MarkdownElement';
 import {
   RaisedButton,
   FlatButton,
@@ -9,10 +10,12 @@ import {
   TextField,
   Dialog,
   FontIcon,
+  Divider,
 } from 'material-ui';
 import PlusIcon from 'material-ui/svg-icons/content/add';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import { CreateJob } from './CreateJob';
 
 import {
   Table,
@@ -63,15 +66,32 @@ class JobsPage extends Component {
     super(props);
     this.state = {
       createNewJobOpen: false,
+      title: '',
+      type: '',
+      discription: '',
+      experience: '',
     };
   }
 
-  componentDidMount() {}
+  onEditText = name => {
+    return event => {
+      this.setState({
+        [name]: event.target.value,
+      });
+    };
+  };
+
+  handleSelectFieldChange = name => {
+    return (event, index, value) => {
+      this.setState({ [name]: value });
+    };
+  };
 
   render() {
     const actions = [
       <FlatButton label='Cancel' primary={ true } onClick={ () => this.setState({ open: false }) } />,
     ];
+    console.log(this.state);
     return (
       <Paper zDepth={ 2 } style={ { padding: '10px', margin: 10 } }>
         <div style={ { display: 'flex', justifyContent: 'space-between' } }>
@@ -84,7 +104,7 @@ class JobsPage extends Component {
           />
         </div>
         <Dialog
-          title='Crete New Job'
+          title='Create New Job'
           open={ this.state.createNewJobOpen }
           actions={ [
             <FlatButton
@@ -95,7 +115,16 @@ class JobsPage extends Component {
           ] }
           autoScrollBodyContent={ true }
         >
-          <p>Jobs test</p>
+          <CreateJob
+            onEditText={ this.onEditText }
+            title={ this.state.title }
+            type={ this.state.type }
+            discription={ this.state.discription }
+            experience={ this.state.experience }
+            onHandleSelectField={ this.handleSelectFieldChange }
+          />
+          <p>Jobs Markdown Result</p>
+          <MarkdownElement text={ this.state.discription } />
         </Dialog>
 
         <Table fixedHeader fixedFooter selectable={ false }>
