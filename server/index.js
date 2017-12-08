@@ -35,6 +35,7 @@ require("./routes/event")(app);
 require("./routes/jobs")(app);
 require("./routes/news")(app);
 require("./routes/repertoire")(app);
+require("./routes/article")(app);
 
 
 if (process.env.NODE_ENV === "production") {
