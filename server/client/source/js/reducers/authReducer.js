@@ -25,6 +25,13 @@ export default function (state = initialState, action) {
         username: action.payload.username,
       };
       break;
+      case AppTypes.SESSION_LOGOUT:
+        state = {
+          ...state,
+          _isLogin: false,
+          username: '',
+        };
+        break;
 
     case AppTypes.FETCH_USER:
         state = {

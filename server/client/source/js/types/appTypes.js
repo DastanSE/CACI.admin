@@ -4,6 +4,7 @@ export default keyMirror({
   SESSION_AUTHORIZE_REQUEST: null,
   SESSION_AUTHORIZE_SUCCESS: null,
   SESSION_AUTHORIZE_FAIL: null,
+  SESSION_LOGOUT: null,
 
   FETCH_USER: null,
 

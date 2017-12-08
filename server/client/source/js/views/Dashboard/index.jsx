@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import { Drawer, Menu, MenuItem, RaisedButton } from 'material-ui';
 import EventIcon from 'material-ui/svg-icons/action/event';
 import EventsPage from '../EventsPage';
@@ -21,7 +23,13 @@ class Dashboard extends Component {
       drawerOpen: true,
     };
   }
+
+  handleLogout() {
+    this.props.sessionLogout();
+  }
+
   render() {
+    console.log(this.props);
     const { match } = this.props;
     return (
       <div>
@@ -43,9 +51,11 @@ class Dashboard extends Component {
               <MenuItem leftIcon={ <ArticleIcon /> } primaryText='Article' />
             </NavLink>
 
-              <MenuItem leftIcon={ <LogOutIcon /> } primaryText='Logout'/>
-              <a href='/api/logout'>logout</a>
-
+            <MenuItem
+              leftIcon={ <LogOutIcon /> }
+              primaryText='Logout'
+              onClick={ this.handleLogout.bind(this) }
+            />
           </Menu>
         </Drawer>
 
@@ -62,4 +72,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default connect(null, actions)(Dashboard);
