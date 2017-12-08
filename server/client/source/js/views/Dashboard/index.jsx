@@ -10,6 +10,8 @@ import NewsIcon from 'material-ui/svg-icons/communication/import-contacts';
 import LogOutIcon from 'material-ui/svg-icons/action/power-settings-new';
 import RepertoirePage from '../RepertoirePage';
 import RepertoireIcon from 'material-ui/svg-icons/action/bookmark';
+import ArticlePage from '../ArticlePage';
+import ArticleIcon from 'material-ui/svg-icons/content/text-format';
 
 
 class Dashboard extends Component {
@@ -37,6 +39,9 @@ class Dashboard extends Component {
             <NavLink className='dashboard-links' to={ `${ match.url }/repertoire` }>
               <MenuItem leftIcon={ <RepertoireIcon /> } primaryText='Repertoire' />
             </NavLink>
+            <NavLink className='dashboard-links' to={ `${ match.url }/article` }>
+              <MenuItem leftIcon={ <ArticleIcon /> } primaryText='Article' />
+            </NavLink>
 
               <MenuItem leftIcon={ <LogOutIcon /> } primaryText='Logout'/>
               <a href='/api/logout'>logout</a>
@@ -49,6 +54,7 @@ class Dashboard extends Component {
           <Route path={ `${ match.url }/jobs` } component={ JobsPage } />
           <Route path={ `${ match.url }/news` } component={ NewsPage } />
           <Route path={ `${ match.url }/repertoire` } component={ RepertoirePage } />
+          <Route path={ `${ match.url }/article` } component={ ArticlePage } />
           <Route exact path={ match.url } render={ () => <h3>Dashboard</h3> } />
         </div>
       </div>

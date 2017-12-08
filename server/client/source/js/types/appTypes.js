@@ -20,6 +20,10 @@ export default keyMirror({
   FETCH_EVENTS_FAIL: null,
   FETCH_EVENTS_SUCCESS: null,
 
+  CREATE_ARTICLE_REQUEST: null,
+  CREATE_ARTICLE_FAIL: null,
+  CREATE_ARTICLE_SUCCESS: null,
+  FETCH_ARTICLE: null,
 
   CREATE_JOB_REQUEST: null,
   CREATE_JOB_FAIL: null,
