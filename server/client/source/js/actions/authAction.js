@@ -30,7 +30,7 @@ function sessionAuthorizeFail(error) {
   };
 }
 
-export const sessionAuthorize = (data) => async dispatch => {
+export const sessionAuthorize = data => async dispatch => {
   dispatch(sessionAuthorizeRequest());
   try {
     const res = await axios.post('api/signin', data);
@@ -41,7 +41,19 @@ export const sessionAuthorize = (data) => async dispatch => {
   }
 };
 
+export const sessionLogout = () => async dispatch => {
+  try {
+    const res = await axios.post('api/logout');
+
+    dispatch({
+      type: AppTypes.SESSION_LOGOUT,
+    });
+  } catch (error) {
+    dispatch(sessionAuthorizeFail(error));
+  }
+};
+
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get("api/current_user");
+  const res = await axios.get('api/current_user');
   dispatch({ type: AppTypes.FETCH_USER, payload: res.data });
 };
