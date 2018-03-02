@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { TextField, DatePicker } from 'material-ui';
 
 export const Step1 = props => {
@@ -22,4 +24,11 @@ export const Step1 = props => {
       />
     </div>
   );
+};
+
+Step1.propTypes = {
+  onEditText: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  onHandleDatePicker: PropTypes.func.isRequired,
+  
 };

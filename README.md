@@ -5,7 +5,7 @@
 CACI 艺文创荟（北京）文化传媒有限公司官网的管理面板
 
 ## Architect
-React and Redux, Webpack 2， Redux Form. 
+React and Redux, Webpack 2， Redux Form, MongoDB store in mlab.com
 
 - components (both container/views and regular ones)
 - routes
